@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-12 text-center">
+            <h2>Welcome, {{ user.first_name|default:user.username }}!</h2>
+            <p class="lead">Manage your gym efficiently and easily.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <span style="font-size:2.5rem; color:#4f46e5;">👥</span>
+                    <h5 class="card-title mt-2">Members</h5>
+                    <a href="{% url 'member_list' %}" class="btn btn-primary w-100">View Members</a>
+                </div>
+            </div>
+        </div>
+        {% if user.is_superuser %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <span style="font-size:2.5rem; color:#4f46e5;">🧑‍💼</span>
+                    <h5 class="card-title mt-2">Users</h5>
+                    <a href="{% url 'manage_users' %}" class="btn btn-info w-100">Manage Users</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

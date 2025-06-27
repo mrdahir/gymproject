@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4" style="width: 500px; border-radius: 18px;">
+        <h2 class="mb-4 text-center">Member Details</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Name:</strong> {{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</li>
+            <li class="list-group-item"><strong>Gender:</strong> {{ member.get_gender_display }}</li>
+            <li class="list-group-item"><strong>Age:</strong> {{ member.age }}</li>
+            <li class="list-group-item"><strong>Address:</strong> {{ member.address }}</li>
+            <li class="list-group-item"><strong>Emergency Phone:</strong> {{ member.emergency_phone }}</li>
+            <li class="list-group-item"><strong>Registration Date:</strong> {{ member.registration_date }}</li>
+            <li class="list-group-item"><strong>Membership Duration:</strong> {{ member.membership_duration }} month(s)</li>
+            <li class="list-group-item"><strong>Expiry Date:</strong> {{ member.expiry_date }}</li>
+            <li class="list-group-item"><strong>Registered By:</strong> {{ member.registered_by.get_full_name|default:member.registered_by.username }}</li>
+            <li class="list-group-item"><strong>Payment Method:</strong> {{ member.get_method_of_payment_display }}</li>
+            <li class="list-group-item"><strong>Amount Paid:</strong> ${{ member.amount_paid }}</li>
+        </ul>
+        <a href="{% url 'member_list' %}" class="btn btn-secondary mt-3 w-100">Back to Member List</a>
+    </div>
+</div>
+{% endblock %} 

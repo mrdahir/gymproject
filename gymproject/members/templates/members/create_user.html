@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4" style="width: 520px; border-radius: 18px;">
+        <div class="text-center mb-3">
+            <span style="font-size: 2.5rem; color: #22c55e;">👤</span>
+            <h2 class="mt-2 mb-1" style="font-family: 'Montserrat', sans-serif; font-weight: 700;">Add New User</h2>
+            <div class="mb-2" style="color:#22c55e; font-size:1.1rem;">Fill in the user details</div>
+        </div>
+        <hr class="mb-4"/>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row g-3">
+                {% for field in form.visible_fields %}
+                <div class="col-12">
+                    <label for="id_{{ field.name }}" class="form-label" style="font-weight:500;">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-success w-100 mt-4">Create User</button>
+        </form>
+        <a href="{% url 'manage_users' %}" class="btn btn-secondary mt-3 w-100">Back to User List</a>
+    </div>
+</div>
+{% endblock %} 
